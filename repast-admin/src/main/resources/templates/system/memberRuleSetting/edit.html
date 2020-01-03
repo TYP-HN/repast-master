@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-memberRuleSetting-edit" th:object="${memberRuleSetting}">
+            <input id="id" name="id" th:field="*{id}"  type="hidden">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">：</label>
+				<div class="col-sm-8">
+					<input id="shopId" name="shopId" th:field="*{shopId}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">连续签到天数：</label>
+				<div class="col-sm-8">
+					<input id="continueSignDay" name="continueSignDay" th:field="*{continueSignDay}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">连续签到赠送数量：</label>
+				<div class="col-sm-8">
+					<input id="continueSignPoint" name="continueSignPoint" th:field="*{continueSignPoint}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">每消费多少元获取1个点：</label>
+				<div class="col-sm-8">
+					<input id="consumePerPoint" name="consumePerPoint" th:field="*{consumePerPoint}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">最低获取点数的订单金额：</label>
+				<div class="col-sm-8">
+					<input id="lowOrderAmount" name="lowOrderAmount" th:field="*{lowOrderAmount}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">每笔订单最高获取点数：</label>
+				<div class="col-sm-8">
+					<input id="maxPointPerOrder" name="maxPointPerOrder" th:field="*{maxPointPerOrder}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">类型：0->积分规则；1->成长值规则：</label>
+				<div class="col-sm-8">
+					<input id="type" name="type" th:field="*{type}" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "system/memberRuleSetting"
+		$("#form-memberRuleSetting-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-memberRuleSetting-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>
