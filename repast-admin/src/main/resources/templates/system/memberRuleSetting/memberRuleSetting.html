@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+    
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="formId">
+					<div class="select-list">
+						<ul>
+							<li>
+								：<input type="text" name="shopId"/>
+							</li>
+
+							<li>
+								连续签到天数：<input type="text" name="continueSignDay"/>
+							</li>
+
+							<li>
+								连续签到赠送数量：<input type="text" name="continueSignPoint"/>
+							</li>
+
+							<li>
+								每消费多少元获取1个点：<input type="text" name="consumePerPoint"/>
+							</li>
+
+							<li>
+								最低获取点数的订单金额：<input type="text" name="lowOrderAmount"/>
+							</li>
+
+							<li>
+								每笔订单最高获取点数：<input type="text" name="maxPointPerOrder"/>
+							</li>
+
+							<li>
+								类型：0->积分规则；1->成长值规则：<input type="text" name="type"/>
+							</li>
+
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:memberRuleSetting:add">
+					<i class="fa fa-plus"></i> 添加
+				</a>
+				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="system:memberRuleSetting:edit">
+					<i class="fa fa-edit"></i> 修改
+				</a>
+				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:memberRuleSetting:remove">
+					<i class="fa fa-remove"></i> 删除
+				</a>
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:memberRuleSetting:export">
+						<i class="fa fa-download"></i> 导出
+				 </a>
+			</div>
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:memberRuleSetting:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:memberRuleSetting:remove')}]];
+        var prefix = ctx + "system/memberRuleSetting";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+				exportUrl: prefix + "/export",
+                modalName: "会员积分成长规则",
+				search: false,
+		        showExport: true,
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'id', 
+					title : '',
+					visible: false
+				},
+				{
+					field : 'shopId', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'continueSignDay', 
+					title : '连续签到天数',
+					sortable: true
+				},
+				{
+					field : 'continueSignPoint', 
+					title : '连续签到赠送数量',
+					sortable: true
+				},
+				{
+					field : 'consumePerPoint', 
+					title : '每消费多少元获取1个点',
+					sortable: true
+				},
+				{
+					field : 'lowOrderAmount', 
+					title : '最低获取点数的订单金额',
+					sortable: true
+				},
+				{
+					field : 'maxPointPerOrder', 
+					title : '每笔订单最高获取点数',
+					sortable: true
+				},
+				{
+					field : 'type', 
+					title : '类型：0->积分规则；1->成长值规则',
+					sortable: true,
+					formatter: function(value, row, index) {
+						if (value == '0') {
+							return '<span class="badge badge-primary">积分规则</span>';
+						} else if (value == '1') {
+							return '<span class="badge badge-danger">成长值规则</span>';
+						}
+					}
+				},
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

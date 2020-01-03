@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-memberRuleSetting-add">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">：</label>
+				<div class="col-sm-8">
+					<input id="shopId" name="shopId" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">连续签到天数：</label>
+				<div class="col-sm-8">
+					<input id="continueSignDay" name="continueSignDay" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">连续签到赠送数量：</label>
+				<div class="col-sm-8">
+					<input id="continueSignPoint" name="continueSignPoint" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">每消费多少元获取1个点：</label>
+				<div class="col-sm-8">
+					<input id="consumePerPoint" name="consumePerPoint" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">最低获取点数的订单金额：</label>
+				<div class="col-sm-8">
+					<input id="lowOrderAmount" name="lowOrderAmount" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">每笔订单最高获取点数：</label>
+				<div class="col-sm-8">
+					<input id="maxPointPerOrder" name="maxPointPerOrder" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">类型：0->积分规则；1->成长值规则：</label>
+				<div class="col-sm-8">
+					<input id="type" name="type" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+	</div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "system/memberRuleSetting"
+		$("#form-memberRuleSetting-add").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/add", $('#form-memberRuleSetting-add').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

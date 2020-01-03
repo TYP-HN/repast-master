@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.repast.admin.project.system.integrationGrantSetting.mapper.IntegrationGrantSettingMapper">
+    
+    <resultMap type="IntegrationGrantSetting" id="IntegrationGrantSettingResult">
+        <result property="id"    column="id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="deductionPerAmount"    column="deduction_per_amount"    />
+    </resultMap>
+	
+	<sql id="selectIntegrationGrantSettingVo">
+        select id, shop_id, deduction_per_amount from ums_integration_grant_setting
+    </sql>
+	
+    <select id="selectIntegrationGrantSettingList" parameterType="IntegrationGrantSetting" resultMap="IntegrationGrantSettingResult">
+        <include refid="selectIntegrationGrantSettingVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="deductionPerAmount != null "> and deduction_per_amount = #{deductionPerAmount}</if>
+         </where>
+    </select>
+    
+    <select id="selectIntegrationGrantSettingById" parameterType="Long" resultMap="IntegrationGrantSettingResult">
+        <include refid="selectIntegrationGrantSettingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertIntegrationGrantSetting" parameterType="IntegrationGrantSetting">
+        insert into ums_integration_grant_setting
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="deductionPerAmount != null  ">deduction_per_amount,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="deductionPerAmount != null  ">#{deductionPerAmount},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateIntegrationGrantSetting" parameterType="IntegrationGrantSetting">
+        update ums_integration_grant_setting
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="deductionPerAmount != null  ">deduction_per_amount = #{deductionPerAmount},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteIntegrationGrantSettingById" parameterType="Long">
+        delete from ums_integration_grant_setting where id = #{id}
+    </delete>
+	
+    <delete id="deleteIntegrationGrantSettingByIds" parameterType="String">
+        delete from ums_integration_grant_setting where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

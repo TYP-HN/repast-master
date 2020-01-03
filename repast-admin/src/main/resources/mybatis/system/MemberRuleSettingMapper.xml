@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.repast.admin.project.system.memberRuleSetting.mapper.MemberRuleSettingMapper">
+    
+    <resultMap type="MemberRuleSetting" id="MemberRuleSettingResult">
+        <result property="id"    column="id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="continueSignDay"    column="continue_sign_day"    />
+        <result property="continueSignPoint"    column="continue_sign_point"    />
+        <result property="consumePerPoint"    column="consume_per_point"    />
+        <result property="lowOrderAmount"    column="low_order_amount"    />
+        <result property="maxPointPerOrder"    column="max_point_per_order"    />
+        <result property="type"    column="type"    />
+    </resultMap>
+	
+	<sql id="selectMemberRuleSettingVo">
+        select id, shop_id, continue_sign_day, continue_sign_point, consume_per_point, low_order_amount, max_point_per_order, type from ums_member_rule_setting
+    </sql>
+	
+    <select id="selectMemberRuleSettingList" parameterType="MemberRuleSetting" resultMap="MemberRuleSettingResult">
+        <include refid="selectMemberRuleSettingVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="continueSignDay != null "> and continue_sign_day = #{continueSignDay}</if>
+             <if test="continueSignPoint != null "> and continue_sign_point = #{continueSignPoint}</if>
+             <if test="consumePerPoint != null "> and consume_per_point = #{consumePerPoint}</if>
+             <if test="lowOrderAmount != null "> and low_order_amount = #{lowOrderAmount}</if>
+             <if test="maxPointPerOrder != null "> and max_point_per_order = #{maxPointPerOrder}</if>
+             <if test="type != null "> and type = #{type}</if>
+         </where>
+    </select>
+    
+    <select id="selectMemberRuleSettingById" parameterType="Long" resultMap="MemberRuleSettingResult">
+        <include refid="selectMemberRuleSettingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertMemberRuleSetting" parameterType="MemberRuleSetting">
+        insert into ums_member_rule_setting
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="continueSignDay != null  ">continue_sign_day,</if>
+			<if test="continueSignPoint != null  ">continue_sign_point,</if>
+			<if test="consumePerPoint != null  ">consume_per_point,</if>
+			<if test="lowOrderAmount != null  ">low_order_amount,</if>
+			<if test="maxPointPerOrder != null  ">max_point_per_order,</if>
+			<if test="type != null  ">type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="continueSignDay != null  ">#{continueSignDay},</if>
+			<if test="continueSignPoint != null  ">#{continueSignPoint},</if>
+			<if test="consumePerPoint != null  ">#{consumePerPoint},</if>
+			<if test="lowOrderAmount != null  ">#{lowOrderAmount},</if>
+			<if test="maxPointPerOrder != null  ">#{maxPointPerOrder},</if>
+			<if test="type != null  ">#{type},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateMemberRuleSetting" parameterType="MemberRuleSetting">
+        update ums_member_rule_setting
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="continueSignDay != null  ">continue_sign_day = #{continueSignDay},</if>
+            <if test="continueSignPoint != null  ">continue_sign_point = #{continueSignPoint},</if>
+            <if test="consumePerPoint != null  ">consume_per_point = #{consumePerPoint},</if>
+            <if test="lowOrderAmount != null  ">low_order_amount = #{lowOrderAmount},</if>
+            <if test="maxPointPerOrder != null  ">max_point_per_order = #{maxPointPerOrder},</if>
+            <if test="type != null  ">type = #{type},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteMemberRuleSettingById" parameterType="Long">
+        delete from ums_member_rule_setting where id = #{id}
+    </delete>
+	
+    <delete id="deleteMemberRuleSettingByIds" parameterType="String">
+        delete from ums_member_rule_setting where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
