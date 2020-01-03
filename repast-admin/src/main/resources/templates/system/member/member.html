@@ -222,7 +222,6 @@
 							return '<span class="badge badge-warning-light">女</span>';
 						}
 					}
-
 				},
 				{
 					field : 'birthday', 
@@ -315,14 +314,14 @@
 		/*用户-停用*/
 		function stop(id) {
 			$.modal.confirm("确认要启用用户吗？", function() {
-				$.operate.post(prefix + "/changeStatus", { "id": id, "status": 1 });
+				$.operate.post(prefix + "/changeStatus", { "id": id, "status": 0 });
 			})
 		}
 
 		/*用户启用*/
 		function start(id) {
 			$.modal.confirm("确认要禁用用户吗", function() {
-				$.operate.post(prefix + "/changeStatus", { "id": id, "status": 0 });
+				$.operate.post(prefix + "/changeStatus", { "id": id, "status": 1});
 			})
 		}
     </script>

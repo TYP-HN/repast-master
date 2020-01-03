@@ -7,6 +7,7 @@ import com.aaa.repast.admin.framework.poi.ExcelUtil;
 import com.aaa.repast.admin.framework.web.controller.BaseController;
 import com.aaa.repast.admin.framework.web.domain.AjaxResult;
 import com.aaa.repast.admin.framework.web.page.TableDataInfo;
+import io.swagger.models.auth.In;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -130,9 +131,9 @@ public class MemberController extends BaseController
 	@Log(title = "会员账号状态", businessType = BusinessType.UPDATE)
 	@PostMapping("/changeStatus")
 	@ResponseBody
-	public AjaxResult changeStatus(Member member)
-	{
-		return null;
+	public AjaxResult changeStatus(Integer id,Integer status) {
+		System.out.println("woshinibababbabababba"+id+status);
+		return 	AjaxResult.success(memberService.updateStatus(id,status));
 	}
 
 }

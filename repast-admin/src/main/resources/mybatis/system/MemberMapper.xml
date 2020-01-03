@@ -168,10 +168,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <update id="updateStatus" parameterType="Member">
-         update ums_member
-         <set>
-             <if test="status! =null and status !=''">status=#{status}</if>
-         </set>
-         where id=#{id}
+        update ums_member u
+        <set>
+            <if test="status==0">
+                u.status = 1,
+            </if>
+            <if test="status==1">
+                u.status = 0,
+            </if>
+
+        </set>
+        where id=#{id}
     </update>
 </mapper>
