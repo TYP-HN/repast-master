@@ -106,5 +106,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+    <update id="updateStatus" parameterType="String">
+      update sms_coupon_history set use_status=2 where coupon_id=#{couponID}
+    </update>
+
     
 </mapper>

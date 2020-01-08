@@ -124,5 +124,17 @@ public class CouponController extends BaseController
 	{		
 		return toAjax(couponService.deleteCouponByIds(ids));
 	}
-	
+
+	/**
+	 * 禁用优惠卷
+	 */
+	@RequiresPermissions("system:coupon:jinyong")
+	@Log(title = "优惠卷", businessType = BusinessType.DELETE)
+	@PostMapping( "/jinyong")
+	@ResponseBody
+	public AjaxResult jinyong(String ids)
+	{
+		return toAjax(couponService.jinYongCouponByIds(ids));
+	}
+
 }
