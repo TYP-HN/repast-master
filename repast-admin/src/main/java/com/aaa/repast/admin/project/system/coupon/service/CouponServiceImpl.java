@@ -1,5 +1,6 @@
 package com.aaa.repast.admin.project.system.coupon.service;
 
+import com.aaa.repast.admin.project.system.couponHistory.mapper.CouponHistoryMapper;
 import com.aaa.repast.common.support.Convert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public class CouponServiceImpl implements ICouponService
 {
 	@Autowired
 	private CouponMapper couponMapper;
+	@Autowired
+	private CouponHistoryMapper couponHistoryMapper;
 
 	/**
      * 查询优惠卷信息
@@ -78,5 +81,15 @@ public class CouponServiceImpl implements ICouponService
 	{
 		return couponMapper.deleteCouponByIds(Convert.toStrArray(ids));
 	}
-	
+
+	@Override
+	public int jinYongCouponByIds(String ids) {
+		int i = couponMapper.deleteCouponByIds(Convert.toStrArray(ids));
+		if (i>0){
+			System.out.println("来了老弟 "+ids);
+		return 	couponHistoryMapper.updateStatus(ids);
+		}
+		return 0;
+	}
+
 }

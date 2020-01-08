@@ -78,6 +78,19 @@ public class MemberServiceImpl implements IMemberService
 	{
 		return memberMapper.deleteMemberByIds(Convert.toStrArray(ids));
 	}
+	/**
+	 * 改变会员状态
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public String updateStatus(Integer id,Integer status) {
+		Integer integer = memberMapper.updateStatus(id,status);
+		if (integer>0){
+			return integer.toString();
+		}
+		return null;
+	}
 
 
 }

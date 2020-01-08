@@ -45,10 +45,16 @@ public interface ICouponService
 		
 	/**
      * 删除优惠卷信息
-     * 
+     *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
 	public int deleteCouponByIds(String ids);
-	
+	/**
+	 * 删除优惠卷信息
+	 *
+	 * @param ids 需要删除的数据ID
+	 * @return 结果
+	 */
+	public int jinYongCouponByIds(String ids);
 }

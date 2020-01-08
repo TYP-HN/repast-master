@@ -1,7 +1,9 @@
 package com.aaa.repast.admin.project.system.member.mapper;
 
 import com.aaa.repast.admin.project.system.member.domain.Member;
-import java.util.List;	
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 会员 数据层
@@ -64,5 +66,5 @@ public interface MemberMapper
 	 * @param id
 	 * @return
 	 */
-	int updateStatus(Long id);
+	Integer updateStatus(@Param("id")Integer id,@Param("status")Integer status);
 }

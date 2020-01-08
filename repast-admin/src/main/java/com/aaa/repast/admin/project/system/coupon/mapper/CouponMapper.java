@@ -1,7 +1,9 @@
 package com.aaa.repast.admin.project.system.coupon.mapper;
 
 import com.aaa.repast.admin.project.system.coupon.domain.Coupon;
-import java.util.List;	
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * 优惠卷 数据层
@@ -9,6 +11,7 @@ import java.util.List;
  * @author Seven Lee
  * @date 2019-12-30
  */
+@Repository
 public interface CouponMapper 
 {
 	/**

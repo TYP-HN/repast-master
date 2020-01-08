@@ -1,7 +1,9 @@
 package com.aaa.repast.admin.project.system.couponHistory.mapper;
 
 import com.aaa.repast.admin.project.system.couponHistory.domain.CouponHistory;
-import java.util.List;	
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * 优惠券使用、领取历史 数据层
@@ -9,6 +11,7 @@ import java.util.List;
  * @author Seven Lee
  * @date 2020-01-02
  */
+@Repository
 public interface CouponHistoryMapper 
 {
 	/**
@@ -58,5 +61,11 @@ public interface CouponHistoryMapper
      * @return 结果
      */
 	public int deleteCouponHistoryByIds(String[] ids);
-	
+
+	/**
+	 * 根据优惠卷的id修改优惠卷历史的状态
+	 * @param couponID
+	 * @return
+	 */
+	int updateStatus(String couponID);
 }

@@ -1,6 +1,8 @@
 package com.aaa.repast.admin.project.system.member.service;
 
 import com.aaa.repast.admin.project.system.member.domain.Member;
+import io.swagger.models.auth.In;
+
 import java.util.List;
 
 /**
@@ -51,5 +53,10 @@ public interface IMemberService
      */
 	public int deleteMemberByIds(String ids);
 
-
+	/**
+	 * 改变会员状态
+	 * @param id
+	 * @return
+	 */
+	String updateStatus(Integer id,Integer status);
 }

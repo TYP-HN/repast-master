@@ -136,12 +136,14 @@ public class Member extends BaseEntity
 	{
 		return status;
 	}
-	public void setCreateTime(Date createTime) 
+	@Override
+	public void setCreateTime(Date createTime)
 	{
 		this.createTime = createTime;
 	}
 
-	public Date getCreateTime() 
+	@Override
+	public Date getCreateTime()
 	{
 		return createTime;
 	}
@@ -281,7 +283,8 @@ public class Member extends BaseEntity
 		return token;
 	}
 
-    public String toString() {
+    @Override
+	public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
             .append("shopId", getShopId())

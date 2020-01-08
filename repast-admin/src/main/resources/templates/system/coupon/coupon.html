@@ -114,6 +114,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('system:coupon:edit')}]];
         var removeFlag = [[${@permission.hasPermi('system:coupon:remove')}]];
+        var jinyong=[[${@permission.hasPermi('system:coupon:jinyong')}]];
         var prefix = ctx + "system/coupon";
 
         $(function() {
@@ -123,6 +124,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
 				exportUrl: prefix + "/export",
+				jinyongUrl:prefix + "/jinyong",
                 modalName: "优惠卷",
 				search: false,
 		        showExport: true,
@@ -268,9 +270,11 @@
 		            align: 'center',
 		            formatter: function(value, row, index) {
 		            	var actions = [];
+						//actions.push(update(row));
+						actions.push('<a class="btn btn-group-xs ' + jinyong + '" href="#" onclick="$.operate.jinyong (\'' + row.id + '\')"><i class=""></i>禁用</a>');
 		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
-						return actions.join('');
+                        return actions.join('');
 		            }
 		        }]
             };
